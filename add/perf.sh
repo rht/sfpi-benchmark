@@ -144,12 +144,12 @@ pylab.title("each size: '$FILESIZEKB'kb")
 pylab.savefig("outdata.png");
 pylab.clf();
 
-throughputs = xarray / tarr * '$FILESIZEKB';
-for x in throughputs: pylab.plot(xarray, x);
-pylab.xlabel("number of files"), pylab.ylabel("throughput (KB/s)");
-pylab.legend(['$TOOLS'], loc="upper center", ncol=3);
-pylab.savefig("throughput_outdata.png");
-pylab.clf();
+#throughputs = xarray / tarr * '$FILESIZEKB';
+#for x in throughputs: pylab.plot(xarray, x);
+#pylab.xlabel("number of files"), pylab.ylabel("throughput (KB/s)");
+#pylab.legend(['$TOOLS'], loc="upper center", ncol=3);
+#pylab.savefig("throughput_outdata.png");
+#pylab.clf();
 
 for x in marr: pylab.plot(xarray, x);
 pylab.xlabel("number of files"), pylab.ylabel("maximum resident size (KB)");
