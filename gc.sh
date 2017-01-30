@@ -2,14 +2,9 @@
 
 export IPFS_PATH=/aux/scratch/ipfs
 EXTRA_ARGS="--raw-leaves"
+. lib.sh
 
-random() {
-    $GOPATH/src/github.com/ipfs/go-ipfs/test/sharness/bin/random "$@"
-}
-
-random_files() {
-    $GOPATH/src/github.com/ipfs/go-ipfs/test/sharness/bin/random-files "$@"
-}
+SEED=$DEFAULT_SEED
 
 set -e
 
@@ -18,14 +13,10 @@ if [ -e d ]; then
     exit 1
 fi
 
-SEED=0
-inc_seed() {
-  SEED=$((SEED + 1))
-}
 
 add_pinned_file() {
     inc_seed
-    random 4000 $SEED > afile
+    random 4000 > afile
     ipfs add $EXTRA_ARGS --pin=true afile > /dev/null
     rm afile
 }
@@ -40,7 +31,7 @@ SEED=0
 add_small_dir() {
   inc_seed
   echo "Creating Small Dir: seed=$SEED"
-  random_files -q -dirs 4 -files 35 -depth 5 -random-fanout -random-size -seed $SEED d
+  random_files -q -dirs 4 -files 35 -depth 5 -random-fanout -random-size d
   echo "Adding Small Dir: pinned=$1"
   /usr/bin/time ipfs add $EXTRA_ARGS --pin=$1 -r d > /dev/null
   rm -r d
@@ -54,7 +45,7 @@ done
 add_med_dir() {
   inc_seed
   echo "Creating Medium Dir: seed=$SEED"
-  random_files -q -dirs 4 -files 100 -depth 7 -random-fanout -random-size -seed $SEED d
+  random_files -q -dirs 4 -files 100 -depth 7 -random-fanout -random-size d
   echo "Adding Medium Dir: pinned=$1"
   /usr/bin/time ipfs add $EXTRA_ARGS --pin=$1 -r d > /dev/null
   rm -r d
@@ -68,7 +59,7 @@ done
 add_large_dir() {
   inc_seed
   echo "Creating Large Dir: seed=$SEED"
-  random_files -q -dirs 4 -files 100 -depth 10  -random-fanout -random-size -seed $SEED d
+  random_files -q -dirs 4 -files 100 -depth 10  -random-fanout -random-size d
   du -hs d
   echo "Adding Large Dir: pinned=$1"
   /usr/bin/time ipfs add $EXTRA_ARGS --pin=$1 -r d > /dev/null
