@@ -1,5 +1,9 @@
 DEFAULT_SEED=42
 
+ipfs_nosync() {
+    ipfs config Datastore.NoSync --json 'true' 2>/dev/null
+}
+
 random() {
     $GOPATH/src/github.com/ipfs/go-ipfs/test/sharness/bin/random "$@" $SEED
 }
@@ -16,3 +20,6 @@ inc_seed() {
 TIME() {
     command time -f '%e %M' $*
 }
+
+# make sure nosync is enabled
+ipfs_nosync
