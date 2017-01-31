@@ -1,5 +1,6 @@
 # sfpi-benchmark
 
+Run `make` to build.  
 TODO: this should be structured just like the sharness test  
 dependencies: go-ipfs, curl, rrdtool, jq, python3
 
