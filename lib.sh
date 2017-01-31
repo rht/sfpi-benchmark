@@ -4,6 +4,12 @@ ipfs_nosync() {
     ipfs config Datastore.NoSync --json 'true' 2>/dev/null
 }
 
+ipfs_reset() {
+    rm -rf ~/.ipfs
+    ipfs init >/dev/null
+    ipfs_nosync
+}
+
 random() {
     $GOPATH/src/github.com/ipfs/go-ipfs/test/sharness/bin/random "$@" $SEED
 }

@@ -3,8 +3,7 @@
 . ../lib.sh
 ## PARAMS
 # number of tools to be benchmarked
-ntools=8
-TOOLS='"random-files","cp","rsync","tar","tar.gz","git","ipfs-flatfs","webtorrent-#-only"'
+TOOLS='random-files,cp,rsync,tar,tar.gz,git,ipfs-flatfs,webtorrent-#-only'
 
 MAXFILESIZEMB=30
 MAXFILESIZE=$(($MAXFILESIZEMB*1000000))
@@ -25,17 +24,12 @@ test_sqlite() {
 }
 export -f test_sqlite
 
-dd_create() {
-    for i in `seq 1000`; do dd if=/dev/urandom of=foo/$i bs=1K count=1 status=none; done
-}
-export -f dd_create
-
 export bzzhash="$GOPATH/src/github.com/ethereum/go-ethereum/swarm/cmd/bzzhash/bzzhash"
 
 perf() {
     #1 random-files
     mkdir -p foo
-    TIME random-files -q --depth=1 --files="$1" --seed=42 --filesize=$FILESIZE foo  #1KB
+    TIME random_files -q --depth=1 --files="$1" --filesize=$FILESIZE foo  #1KB
     #TIME bash -c "dd_create"
 
     #2 cp
@@ -122,37 +116,6 @@ do
 done
 
 #cleanup ipfs
-rm -rf ~/.ipfs
-ipfs init >/dev/null
-ipfs_nosync
+ipfs_reset
 
-python -c '
-import matplotlib; matplotlib.use("Agg");
-import matplotlib.pyplot as plt;
-plt.style.use("seaborn-whitegrid");
-import pylab;
-tarr, marr = pylab.hsplit(pylab.loadtxt("outdata"), 2);
-l = len(tarr);
-datapoints = int(l/'$ntools');
-tarr = tarr.reshape((datapoints, '$ntools')).T; marr = marr.reshape((datapoints, '$ntools')).T;
-print("number of datapoints " + str(datapoints));
-xarray = pylab.arange(50, '$NFILES', '$step');
-for x in tarr: pylab.plot(xarray, x);
-pylab.xlabel("number of files"), pylab.ylabel("elapsed time (s)");
-pylab.legend(['$TOOLS'], loc="upper center", ncol=3);
-pylab.title("each size: '$FILESIZEKB'kb")
-pylab.savefig("outdata.png");
-pylab.clf();
-
-#throughputs = xarray / tarr * '$FILESIZEKB';
-#for x in throughputs: pylab.plot(xarray, x);
-#pylab.xlabel("number of files"), pylab.ylabel("throughput (KB/s)");
-#pylab.legend(['$TOOLS'], loc="upper center", ncol=3);
-#pylab.savefig("throughput_outdata.png");
-#pylab.clf();
-
-for x in marr: pylab.plot(xarray, x);
-pylab.xlabel("number of files"), pylab.ylabel("maximum resident size (KB)");
-pylab.legend(['$TOOLS'], loc="upper center", ncol=3);
-pylab.savefig("memory.png");
-'
+python graph.py $NFILES $TOOLS $step $FILESIZEKB
