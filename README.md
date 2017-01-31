@@ -1,14 +1,22 @@
 # sfpi-benchmark
 
-Run `make` to build.  
+USAGE: run `make` to build graph, `make clean && make` to rerun the benchmark  
 TODO: this should be structured just like the sharness test  
-dependencies: go-ipfs, curl, rrdtool, jq, python3
+dependencies: go-ipfs, curl, rrdtool, jq, python3, matplotlib, numpy
 
 #add
 
 Add performance of many small files on ipfs, compared to various tools.  
 data: 10 kb each of files up to 3000 files
 ![](add/outdata.png)
+
+#go-ipfs binary size
+
+TODO: automatically generate this report
+```shell
+$ du -b $f | awk -F ' ' '{ print $1 }'
+```
+24 MB on 'go-ipfs version: 0.4.5-pre2-'
 
 #bitswap
 

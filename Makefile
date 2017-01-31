@@ -15,3 +15,8 @@ repo_size/graph_10k.png:
 	cd repo_size ;\
 	./benchmark.sh 10000 | tee 10k_log.csv ;\
 	./graph.py --csv 10k_log.csv
+
+clean:
+	-rm add/outdata.png
+	-rm bitswap/ipfs.png
+	-rm repo_size/graph_10k.png
