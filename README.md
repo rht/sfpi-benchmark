@@ -28,3 +28,5 @@ data: 10 kb each of files up to 3000 files
 
 #repo size after pinned add
 - https://github.com/ipfs/go-ipfs/issues/3621, https://ipfs.io/ipfs/QmcsrSRuBmxNxcEXjMZ1pmyRgnutCGwfAhhnRfaNn9P94F (@mguentner)
+
+![](repo_size/graph_10k.png)
