@@ -3,6 +3,8 @@ count=0
 log_every=100
 bytes_written=0
 
+. ../lib.sh
+
 mkdir -p d
 if [ "$(ls -A d)" ]
 then
