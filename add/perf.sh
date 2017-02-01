@@ -50,6 +50,8 @@ perf() {
     rm foo.tar.gz
 
     #6 git
+    savedWD=$PWD
+    cd /tmp
     mkdir -p gitfoo
     cd gitfoo && cp -r ../foo foogit && git init -q
     TIME git add foogit
@@ -57,6 +59,7 @@ perf() {
     #time git commit -q -m 'foo'
     cd ..
     rm -rf gitfoo
+    cd $savedWD
 
     #http://stackoverflow.com/questions/10353467/how-to-insert-binary-data-into-sqlite3-database-in-bash
     #echo "create table files (file blob);" | sqlite3 files.db
