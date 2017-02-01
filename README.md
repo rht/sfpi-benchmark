@@ -21,6 +21,13 @@ dependencies: go-ipfs, curl, rrdtool, jq, python3, matplotlib, numpy
 
 ![](bitswap/ipfs.png)
 
+#chunking
+
+- Comparison of chunking scheme (default is size-262144)  
+  data: president's daily brief
+
+![](chunk/outdata_pdb.png)
+
 #gc
 
 - https://github.com/ipfs/go-ipfs/issues/3462 (@kevina)

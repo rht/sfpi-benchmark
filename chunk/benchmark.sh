@@ -2,8 +2,9 @@
 
 . ../lib.sh
 
-NAME=pdb
+#NAME=pdb
 #NAME=rfc
+NAME=d
 DATA=$DATADIR/$NAME
 
 ipfschunk() {
