@@ -14,9 +14,17 @@ else
   tar xf $DATADIR/narinfo.tar.gz -C $DATADIR/d
 fi
 
+#ipfs files mkdir /narinfo
 for f in $(ls $DATADIR/d/*.narinfo | sort -R | tail -n $1)
 do
-  ipfs --local add --raw-leaves $f > /dev/null 2>&1
+  if [ "$TESTFILESAPI" = true ]
+  then
+    hashname=$(ipfs --local add -q $f)
+    sleep 1
+    ipfs files cp /ipfs/$hashname /narinfo/$hashname
+  else
+    ipfs --local add --raw-leaves $f > /dev/null 2>&1
+  fi
   count=$((count + 1))
   bytes_written=$(($bytes_written + $(du -b $f | awk -F ' ' '{ print $1 }')))
   if (($count % log_every == 0))

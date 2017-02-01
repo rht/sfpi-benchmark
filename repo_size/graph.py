@@ -14,7 +14,7 @@ def byte_to_megabyte(x):
     return (x / (1024 * 1024)).astype(int)
 
 
-def graph_ipfs(data):
+def graph_ipfs(data, output):
     # data is [ [filecount, data_disk, data_repo] ]
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
@@ -25,12 +25,13 @@ def graph_ipfs(data):
     ax1.set_ylabel('Size in MiB')
     ax1.set_xlabel('Files added')
 
-    plt.savefig("graph_10k.png")
+    plt.savefig(output)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--csv', required=True, type=str)
+    parser.add_argument('--output', required=True, type=str)
     args = parser.parse_args()
     data = genfromtxt(args.csv, delimiter=',', names=['fc', 'dd', 'dr'])
-    graph_ipfs(data)
+    graph_ipfs(data, args.output)

@@ -7,10 +7,12 @@ dependencies: go-ipfs, curl, rrdtool, jq, python3, matplotlib, numpy
 
 #add
 
-- Add performance of many small files on ipfs, compared to various tools.  data: 10 kb each of files up to 3000 files
+- Add performance of many small files on ipfs, compared to various tools.  
+  data: 10 kb each of files up to 3000 files
 ![](add/outdata.png)
 
-- Add performance repeatedly over a growing repo size
+- Add performance repeatedly over a growing repo size  
+  https://github.com/ipfs/go-ipfs/issues/3545
 ![](add_growing_repo/outdata.png)
 
 #bitswap
@@ -37,7 +39,14 @@ Memory consumption of `ipfs add` compared to various tools
 data: 10 kb each of files up to 3000 files
 ![](add/memory.png)
 
-#repo size after pinned add
-- https://github.com/ipfs/go-ipfs/issues/3621, https://ipfs.io/ipfs/QmcsrSRuBmxNxcEXjMZ1pmyRgnutCGwfAhhnRfaNn9P94F (@mguentner)
+#repo size growth
+- Repo size after pinned add  
+  https://github.com/ipfs/go-ipfs/issues/3621  
+  https://ipfs.io/ipfs/QmcsrSRuBmxNxcEXjMZ1pmyRgnutCGwfAhhnRfaNn9P94F (@mguentner)
 
 ![](repo_size/graph_10k.png)
+
+- Repo size after being added through files api  
+  https://github.com/ipfs/go-ipfs/issues/3254
+
+![](repo_size/graph_10k_filesapi.png)

@@ -15,7 +15,7 @@ filecount,size_disk,size_repo
 
 You can then graph the result using graph.py:
 
-./graph.py --csv 10k_log.csv
+./graph.py --csv 10k_log.csv --output graph_10k.png
 
 and then ponder about exponential growth with limited
 resources.
