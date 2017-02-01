@@ -1,9 +1,14 @@
-all: add/outdata.png bitswap/ipfs.png repo_size/graph_10k.png
+all: add/outdata.png bitswap/ipfs.png repo_size/graph_10k.png add_growing_repo/outdata.png
 
 add/outdata.png:
 	set -e ;\
 	cd add ;\
 	./perf.sh
+
+add_growing_repo/outdata.pngj:
+	set -e ;\
+	cd add_growing_repo ;\
+	./benchmark.sh
 
 bitswap/ipfs.png:
 	set -e ;\

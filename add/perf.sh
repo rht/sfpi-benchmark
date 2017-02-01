@@ -2,7 +2,6 @@
 
 . ../lib.sh
 ## PARAMS
-# number of tools to be benchmarked
 TOOLS='random-files,cp,rsync,tar,tar.gz,git,ipfs-flatfs,webtorrent-#-only'
 
 MAXFILESIZEMB=30
@@ -29,7 +28,7 @@ export bzzhash="$GOPATH/src/github.com/ethereum/go-ethereum/swarm/cmd/bzzhash/bz
 perf() {
     #1 random-files
     mkdir -p foo
-    TIME random_files -q --depth=1 --files="$1" --filesize=$FILESIZE foo  #1KB
+    TIME random-files -q --depth=1 --files="$1" --filesize=$FILESIZE foo  #1KB
     #TIME bash -c "dd_create"
 
     #2 cp

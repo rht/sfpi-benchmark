@@ -4,16 +4,17 @@ log_every=100
 bytes_written=0
 
 . ../lib.sh
+DATADIR=../data
 
-mkdir -p d
-if [ "$(ls -A d)" ]
+mkdir -p $DATADIR/d
+if [ "$(ls -A $DATADIR/d)" ]
 then
   :
 else
-  tar xf narinfo.tar.gz -C d/
+  tar xf $DATADIR/narinfo.tar.gz -C $DATADIR/d
 fi
 
-for f in $(ls d/*.narinfo | sort -R | tail -n $1)
+for f in $(ls $DATADIR/d/*.narinfo | sort -R | tail -n $1)
 do
   ipfs --local add --raw-leaves $f > /dev/null 2>&1
   count=$((count + 1))
