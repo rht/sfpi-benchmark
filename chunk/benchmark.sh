@@ -26,16 +26,23 @@ ipfstargz() {
     rm $NAME.tar.gz
 }
 
+tarutil() {
+    fname=$2
+    TIME tar $1 $fname -P $DATA
+    echo "$3 $(disk_size $fname)" >>size
+    rm $fname
+}
+
 targz() {
-    TIME tar czf $NAME.tar.gz -P $DATA
-    echo "targz $(disk_size $NAME.tar.gz)" >>size
-    rm $NAME.tar.gz
+    tarutil cfz $NAME.tar.gz targz
+}
+
+tarxz() {
+    tarutil cfJ $NAME.tar.xz tarxz
 }
 
 tarbz2() {
-    TIME tar cjf $NAME.tar.bz2 -P $DATA
-    echo "tarbz2 $(disk_size $NAME.tar.bz2)" >>size
-    rm $NAME.tar.bz2
+    tarutil cfj $NAME.tar.bz2 tarbz2
 }
 
 7zip() {
@@ -64,6 +71,7 @@ echo -n "" >outdata
 echo -n "" >size
 
 targz 2>>outdata
+tarxz 2>>outdata
 tarbz2 2>>outdata
 7zip 2>>outdata
 gitpackfile 2>>outdata
