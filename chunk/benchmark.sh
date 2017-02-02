@@ -2,9 +2,9 @@
 
 . ../lib.sh
 
-#NAME=pdb
+NAME=pdb
 #NAME=rfc
-NAME=d
+#NAME=d
 DATA=$DATADIR/$NAME
 
 disk_size() {
@@ -79,5 +79,6 @@ ipfstargz ipfstargz 2>>outdata
 ipfschunk size-262144 2>>outdata # default, 256KB
 ipfschunk rabin 2>>outdata
 ipfschunk size-10240 2>>outdata # 10 KB
+ipfschunk size-1024 2>>outdata # 10 KB
 
 python graph.py
