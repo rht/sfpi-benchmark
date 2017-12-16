@@ -18,6 +18,7 @@ do
     hashname=$(ipfs --local add -q $f)
     sleep 1
     ipfs files cp /ipfs/$hashname /narinfo/$hashname
+    ipfs files flush /
   else
     ipfs --local add --raw-leaves $f > /dev/null 2>&1
   fi

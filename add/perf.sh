@@ -53,7 +53,9 @@ perf() {
     savedWD=$PWD
     cd /tmp
     mkdir -p gitfoo
-    cd gitfoo && cp -r ../foo foogit && git init -q
+    cp -a $savedWD/foo gitfoo/foogit
+    cd gitfoo
+    git init -q
     TIME git add foogit
     #echo 'git initial commit'
     #time git commit -q -m 'foo'
