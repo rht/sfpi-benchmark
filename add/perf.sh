@@ -53,7 +53,9 @@ perf() {
     savedWD=$PWD
     cd /tmp
     mkdir -p gitfoo
-    cd gitfoo && cp -r ../foo foogit && git init -q
+    cp -a $savedWD/foo gitfoo/foogit
+    cd gitfoo
+    git init -q
     TIME git add foogit
     #echo 'git initial commit'
     #time git commit -q -m 'foo'
@@ -83,6 +85,7 @@ perf() {
     #ipfs pin rm -r $(cat hashname)
     #ipfs pin rm $(cat hashname)
     rm hashname
+    ipfs_reset
 
     #8 'webtorrent create'
     TIME webtorrent create >webtorrent.out
@@ -94,9 +97,6 @@ perf() {
     #rm bzzhash.out
 
     #9 'jsipfs add'
-    #rm -r ~/.ipfs
-    #ipfs init >/dev/null
-    #ipfs config Datastore.NoSync --json 'true' 2>/dev/null
     #TIME jsipfs files add -q -r foo >hashname
     #rm hashname
 

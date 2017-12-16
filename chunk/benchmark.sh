@@ -2,7 +2,8 @@
 
 . ../lib.sh
 
-NAME=pdb
+NAME=emacss
+#NAME=pdb
 #NAME=rfc
 #NAME=d
 DATA=$DATADIR/$NAME
@@ -58,6 +59,7 @@ gitpackfile() {
     cd repo
     cp -r $savedWD/$DATA data
     git init -q
+    git config core.safecrlf false
     TIME git add data
     #echo "git-objects $(($(git count-objects  | awk '{ print $3 }')*1024))" >>$savedWD/size
     echo "git-objects $(disk_size .git/objects)" >>$savedWD/size
@@ -79,6 +81,6 @@ ipfstargz ipfstargz 2>>outdata
 ipfschunk size-262144 2>>outdata # default, 256KB
 ipfschunk rabin 2>>outdata
 ipfschunk size-10240 2>>outdata # 10 KB
-ipfschunk size-1024 2>>outdata # 10 KB
+#ipfschunk size-4000 2>>outdata # 10 KB
 
 python graph.py

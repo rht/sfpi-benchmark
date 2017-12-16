@@ -1,4 +1,5 @@
-all: add/outdata.png bitswap/ipfs.png repo_size/graph_10k.png repo_size/graph_10k_filesapi.png add_growing_repo/outdata.png
+all: add/outdata.png repo_size/graph_10k.png repo_size/graph_10k_filesapi.png add_growing_repo/outdata.png
+#all: add/outdata.png bitswap/ipfs.png repo_size/graph_10k.png repo_size/graph_10k_filesapi.png add_growing_repo/outdata.png
 
 add/outdata.png:
 	set -e ;\
@@ -24,8 +25,8 @@ repo_size/graph_10k.png:
 repo_size/graph_10k_filesapi.png:
 	set -e ;\
 	cd repo_size ;\
-	TESTFILESAPI=true ./benshmark.sh 10000 | tee 10k_log_filesapi.csv ;\
-	./graph --csv 10k_log_filesapi.csv --output graph_10k_filesapi.png
+	TESTFILESAPI=true ./benchmark.sh 10000 | tee 10k_log_filesapi.csv ;\
+	./graph.py --csv 10k_log_filesapi.csv --output graph_10k_filesapi.png
 
 clean:
 	-rm add/outdata.png

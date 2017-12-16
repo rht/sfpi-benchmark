@@ -30,6 +30,9 @@ benchmark() {
     done
 }
 
+#cleanup ipfs
+ipfs_reset
+
 # run add benchmark
 echo -n "" >outdata
 benchmark

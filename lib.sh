@@ -1,13 +1,14 @@
 DEFAULT_SEED=42
 DATADIR=../data
+SPEC_NOSYNC=$(cat ../add/spec-nosync)
 
 ipfs_nosync() {
-    ipfs config Datastore.NoSync --json 'true' 2>/dev/null
+    ipfs config --json Datastore.Spec "$SPEC_NOSYNC" 2>/dev/null
 }
 
 ipfs_reset() {
     rm -rf ~/.ipfs
-    ipfs init >/dev/null
+    ipfs init -e >/dev/null
     ipfs_nosync
 }
 

@@ -3,7 +3,8 @@
 . ../lib.sh
 
 NAME=emacss
-declare -a emacsArr=(emacs-20.1 emacs-20.2 emacs-20.3 emacs-20.4 emacs-24.4 emacs-24.5)
+#declare -a emacsArr=(emacs-20.1 emacs-20.2 emacs-20.3 emacs-20.4 emacs-24.4 emacs-24.5)
+declare -a emacsArr=(emacs-20.1 emacs-20.2 emacs-20.3)
 #NAME=pdb
 #NAME=rfc
 #NAME=d
@@ -92,6 +93,6 @@ ipfstargz ipfstargz
 ipfschunk size-262144 # default, 256KB
 ipfschunk rabin
 ipfschunk size-10240 # 10 KB
-ipfschunk size-4000 # 10 KB
+#ipfschunk size-4000 # 10 KB
 #
 python graph.py
